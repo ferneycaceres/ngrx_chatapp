@@ -17,7 +17,7 @@ export class ThreadSectionComponent implements OnInit {
               private store : Store<ApplicationState>) {
 
     store.subscribe(
-      console.log
+      state => console.log('thead section received',state)
     );
 
   }
