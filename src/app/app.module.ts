@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import * as _ from 'lodash';
+
+
+
 import { AppComponent } from './app.component';
 import { UserSelectionComponent } from './user-selection/user-selection.component';
 import { ThreadSectionComponent } from './thread-section/thread-section.component';
@@ -58,10 +62,7 @@ function handleLoadUserThreadsAction(state:ApplicationState,action:LoadUserThrea
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.forRoot({}, {
-      reducerFactory: storeReducer,
-      initialState: INITIAL_APPLICATION_STATE
-  }),
+    StoreModule.forRoot({reducer:storeReducer},)
   ],
   providers: [ThreadsService],
   bootstrap: [AppComponent]
