@@ -17,8 +17,10 @@ import {ThreadsService} from "./services/threads.service";
 import { StoreModule, Action } from '@ngrx/store';
 import { INITIAL_APPLICATION_STATE, ApplicationState } from 'store/application-state';
 import { LOAD_USER_THREADS_ACTION, LoadUserThreadsAction } from 'store/actions';
+import { uiState } from 'store/reducers/uiStateReducer';
+import { storeData } from 'store/reducers/uiStoreDataReducer';
 
-function storeReducer(state:ApplicationState,action:Action):ApplicationState{
+/*function storeReducer(state:ApplicationState,action:Action):ApplicationState{
 
   switch(action.type){
 
@@ -47,7 +49,12 @@ function handleLoadUserThreadsAction(state:ApplicationState,action:LoadUserThrea
 
   return newState
 
-}
+}*/
+
+const reducers = {
+  uiState,
+  storeData
+};
 
 @NgModule({
   declarations: [
@@ -62,7 +69,8 @@ function handleLoadUserThreadsAction(state:ApplicationState,action:LoadUserThrea
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.forRoot({reducer:storeReducer},)
+    StoreModule.forRoot(reducers, {initialState: INITIAL_APPLICATION_STATE}),
+    /*StoreModule.forRoot({reducer:storeReducer},)*/
   ],
   providers: [ThreadsService],
   bootstrap: [AppComponent]
