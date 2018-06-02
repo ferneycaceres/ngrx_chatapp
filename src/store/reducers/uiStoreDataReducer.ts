@@ -2,6 +2,7 @@ import {StoreData} from "../store-data";
 import {Action} from "@ngrx/store";
 import * as _ from 'lodash';
 import { USER_THREADS_LOADED_ACTION, UserThreadsLoadedAction } from "../actions/actions";
+import { LOAD_USER_THREADS_ACTION, LoadUserThreadsAction } from "../actions";
 
 export function storeData(state: StoreData, action:Action) : StoreData {
     switch (action.type)  {
