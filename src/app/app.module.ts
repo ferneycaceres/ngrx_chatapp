@@ -17,6 +17,9 @@ import { StoreModule, Action } from '@ngrx/store';
 import { INITIAL_APPLICATION_STATE, ApplicationState } from 'store/application-state';
 import { uiState } from 'store/reducers/uiStateReducer';
 import { storeData } from 'store/reducers/uiStoreDataReducer';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { LoadThreadsEffectService } from 'store/effects/load-threads-effect.service';
 
 
 const reducers = {
@@ -38,6 +41,8 @@ const reducers = {
     FormsModule,
     HttpModule,
     StoreModule.forRoot(reducers, {initialState: INITIAL_APPLICATION_STATE}),
+    EffectsModule.forRoot([LoadThreadsEffectService]),
+    StoreDevtoolsModule.instrument({maxAge: 25})
   ],
   providers: [ThreadsService],
   bootstrap: [AppComponent]

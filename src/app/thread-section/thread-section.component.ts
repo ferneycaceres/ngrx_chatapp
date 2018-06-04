@@ -6,10 +6,11 @@ import { UserThreadsLoadedAction } from 'store/actions/actions';
 import { Observable } from 'rxjs/Observable';
 import { Thread } from '../../../shared/model/thread';
 import { ThreadSummaryVM } from './thread-summary.vm';
-import { mapStatetoUserName } from './mapStatetoUserName';
+import { userNameSelector } from './userNameSelector';
 import { mapStateToUnreadMessagesCounter } from './mapStateToUnreadMessagesCounter';
 import * as _ from 'lodash';
 import { stateToThreadSummariesSelector } from './StateToThreadSummariesSelector';
+import { LoadUserThreadsAction } from '../../store/actions';
 
 
 
@@ -17,7 +18,6 @@ import { stateToThreadSummariesSelector } from './StateToThreadSummariesSelector
   selector: 'thread-section',
   templateUrl: './thread-section.component.html',
   styleUrls: ['./thread-section.component.css'],
-  providers:[ThreadsService]
 })
 export class ThreadSectionComponent implements OnInit {
 
@@ -25,16 +25,11 @@ export class ThreadSectionComponent implements OnInit {
   unreadMessagesCounter$ : Observable<number>;
   threadSummaries$ :Observable<ThreadSummaryVM[]>;
   
-  constructor(private threadsService: ThreadsService,
-              private store : Store<ApplicationState>) {
+  constructor(private store : Store<ApplicationState>) {
 
-    this.userName$ = store
-                      .skip(1)
-                      .map(mapStatetoUserName)
+    this.userName$ = store.select(userNameSelector)
 
-    this.unreadMessagesCounter$ = store
-                                    .skip(1)
-                                    .map(mapStateToUnreadMessagesCounter)
+    this.unreadMessagesCounter$ = store.map(mapStateToUnreadMessagesCounter)
 
     this.threadSummaries$ = store
                             .select(stateToThreadSummariesSelector)
@@ -45,12 +40,15 @@ export class ThreadSectionComponent implements OnInit {
 
 
   ngOnInit() {
-    this.threadsService.loadUserThreads()
+
+    this.store.dispatch(new LoadUserThreadsAction());
+
+    /*this.threadsService.loadUserThreads()
     .subscribe(
       allUserData => this.store.dispatch(
         new UserThreadsLoadedAction(allUserData)
       )
-    );
+    );*/
   }
 
 }
