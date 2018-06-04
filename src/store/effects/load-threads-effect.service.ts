@@ -12,6 +12,7 @@ export class LoadThreadsEffectService {
 
   @Effect () userThreads$:Observable<Action> = this.actions$
             .ofType(LOAD_USER_THREADS_ACTION)
+            .debug('debug')
             .switchMap(()=>this.threadsService.loadUserThreads())
             .map(allUserData => new UserThreadsLoadedAction(allUserData))
 
