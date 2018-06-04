@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ThreadsService } from '../services/threads.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { ThreadSummaryVM } from '../thread-section/thread-summary.vm';
 
 @Component({
   selector: 'thread-list',
   templateUrl: './thread-list.component.html',
   styleUrls: ['./thread-list.component.css'],
-  providers : [ThreadsService]
 })
+
 export class ThreadListComponent implements OnInit {
 
-  constructor(private threadsService : ThreadsService) { }
+  @Input()
+  threads : ThreadSummaryVM[];
+
+  constructor() { }
 
   ngOnInit() {
 

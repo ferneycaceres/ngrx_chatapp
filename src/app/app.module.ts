@@ -15,7 +15,6 @@ import { MessageListComponent } from './message-list/message-list.component';
 import {ThreadsService} from "./services/threads.service";
 import { StoreModule, Action } from '@ngrx/store';
 import { INITIAL_APPLICATION_STATE, ApplicationState } from 'store/application-state';
-import { LOAD_USER_THREADS_ACTION, LoadUserThreadsAction } from 'store/actions';
 import { uiState } from 'store/reducers/uiStateReducer';
 import { storeData } from 'store/reducers/uiStoreDataReducer';
 
