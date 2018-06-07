@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from 'store/application-state';
-import { ThreadsService } from '../services/threads.service';
-import { UserThreadsLoadedAction } from 'store/actions/actions';
 import { Observable } from 'rxjs/Observable';
-import { Thread } from '../../../shared/model/thread';
 import { ThreadSummaryVM } from './thread-summary.vm';
 import { userNameSelector } from './userNameSelector';
 import { mapStateToUnreadMessagesCounter } from './mapStateToUnreadMessagesCounter';
-import * as _ from 'lodash';
 import { stateToThreadSummariesSelector } from './StateToThreadSummariesSelector';
 import { LoadUserThreadsAction } from '../../store/actions';
+import { ThreadSelectedAction } from '../../store/actions/actions';
 
 
 
@@ -31,8 +28,7 @@ export class ThreadSectionComponent implements OnInit {
 
     this.unreadMessagesCounter$ = store.map(mapStateToUnreadMessagesCounter)
 
-    this.threadSummaries$ = store
-                            .select(stateToThreadSummariesSelector)
+    this.threadSummaries$ = store.select(stateToThreadSummariesSelector)
 
   }
 
@@ -42,13 +38,12 @@ export class ThreadSectionComponent implements OnInit {
   ngOnInit() {
 
     this.store.dispatch(new LoadUserThreadsAction());
+  }
 
-    /*this.threadsService.loadUserThreads()
-    .subscribe(
-      allUserData => this.store.dispatch(
-        new UserThreadsLoadedAction(allUserData)
-      )
-    );*/
+  onThreadSelected(SelectedThreadId:number){
+
+    this.store.dispatch(new ThreadSelectedAction(SelectedThreadId));
+
   }
 
 }
