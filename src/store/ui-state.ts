@@ -5,6 +5,6 @@ export interface UiState{
 }
 
 export const INITIAL_UISTATE: UiState = {
-    userId: 1,
+    userId: undefined,
     currentThreadId : undefined,
 }
