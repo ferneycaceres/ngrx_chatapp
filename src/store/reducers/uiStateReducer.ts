@@ -1,7 +1,6 @@
 import { SelectUserAction } from 'store/actions/actions';
 import { SELECT_USER_ACTION } from './../actions/actions';
 import {UiState, INITIAL_UISTATE} from "../ui-state";
-import {Action} from "@ngrx/store";
 import { THREAD_SELECTED_ACTION } from "../actions/actions";
 
 
@@ -20,7 +19,6 @@ export function uiState(state: UiState = INITIAL_UISTATE, action: any) : UiState
         case SELECT_USER_ACTION : 
             
             return handleSelectUserAction(state,action);
-
 
 
         default:
